@@ -1,0 +1,8 @@
+Ver 0.1.0 - Initial Version
+- Fractal Mandelbrot
+- Fractal JuliaSet
+- Fractal Newton
+- Dialog JuliaSet
+- Dialog Iteration
+- Color Palette
+- Function Parameters
