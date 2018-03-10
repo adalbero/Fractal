@@ -1,8 +1,15 @@
 Ver 0.1.0 - Initial Version
-- Fractal Mandelbrot
-- Fractal JuliaSet
-- Fractal Newton
-- Dialog JuliaSet
-- Dialog Iteration
-- Color Palette
-- Function Parameters
+- Fractal - Mandelbrot
+- Fractal - JuliaSet
+- Fractal - Newton
+- UI - Fractal Panel
+- UI - Palette Panel
+- UI - Params Dialog
+- UI - Status Bar
+- UI - Toolbar
+- UI - Progress Bar
+- UI - Color Palette
+- UI - Function Parameters
+- UI - Dialog JuliaSet
+- UI - Dialog Iteration
+- UI - Graph Panel
