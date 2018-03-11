@@ -1,7 +1,7 @@
 package com.adalbero.app.fractal.functions;
 
-import com.adalbero.app.fractal.data.Complex;
-import com.adalbero.app.fractal.data.Palette;
+import com.adalbero.app.fractal.model.Complex;
+import com.adalbero.app.fractal.model.Palette;
 
 public class NewtonZ6 extends Newton {
 	private static final int NUM_ROOTS = 6;
@@ -12,8 +12,8 @@ public class NewtonZ6 extends Newton {
 	}
 
 	@Override
-	public String getName() {
-		return "Newton z^6+z^3-1";
+	public String getFunction() {
+		return "f(z) = z^6+z^3-1";
 	}
 
 	@Override

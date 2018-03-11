@@ -1,6 +1,6 @@
 package com.adalbero.app.fractal.functions;
 
-import com.adalbero.app.fractal.data.Complex;
+import com.adalbero.app.fractal.model.Complex;
 
 public class NewtonTest extends Newton {
 	private static final int NUM_ROOTS = 2;
@@ -11,8 +11,8 @@ public class NewtonTest extends Newton {
 	}
 
 	@Override
-	public String getName() {
-		return "Newton z^2-1";
+	public String getFunction() {
+		return "f(z) = z^2-1";
 	}
 
 	@Override

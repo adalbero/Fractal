@@ -1,8 +1,9 @@
 package com.adalbero.app.fractal.functions;
 
-import com.adalbero.app.fractal.data.Complex;
-import com.adalbero.app.fractal.data.ComplexPlane;
-import com.adalbero.app.fractal.data.Palette;
+import com.adalbero.app.fractal.model.Complex;
+import com.adalbero.app.fractal.model.ComplexPlane;
+import com.adalbero.app.fractal.model.Coordinate;
+import com.adalbero.app.fractal.model.Palette;
 
 public class JuliaSet extends Mandelbrot {
 
@@ -27,7 +28,7 @@ public class JuliaSet extends Mandelbrot {
 	}
 
 	@Override
-	public ComplexPlane getPreferedComplexPlane() {
+	public ComplexPlane getPreferedPlane() {
 		return new ComplexPlane(Complex.ZERO, 2f);
 	}
 
@@ -43,11 +44,11 @@ public class JuliaSet extends Mandelbrot {
 		valueC = getParams().getComplex(C);
 	}
 
-	public Complex getZ0(Complex point) {
-		return point;
+	public Complex getZ0(Coordinate point) {
+		return new Complex(point);
 	}
 
-	public Complex getC(Complex point) {
+	public Complex getC(Coordinate point) {
 		return valueC;
 	}
 

@@ -3,10 +3,11 @@ package com.adalbero.app.fractal.functions;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.adalbero.app.fractal.data.Complex;
-import com.adalbero.app.fractal.data.ComplexPlane;
-import com.adalbero.app.fractal.data.Palette;
-import com.adalbero.app.fractal.data.Result;
+import com.adalbero.app.fractal.model.Complex;
+import com.adalbero.app.fractal.model.ComplexPlane;
+import com.adalbero.app.fractal.model.Coordinate;
+import com.adalbero.app.fractal.model.Palette;
+import com.adalbero.app.fractal.model.Result;
 
 public abstract class Newton extends Fractal {
 
@@ -33,7 +34,7 @@ public abstract class Newton extends Fractal {
 	}
 
 	@Override
-	public ComplexPlane getPreferedComplexPlane() {
+	public ComplexPlane getPreferedPlane() {
 		return new ComplexPlane(Complex.ZERO, 2f);
 	}
 
@@ -44,7 +45,7 @@ public abstract class Newton extends Fractal {
 
 	@Override
 	public Palette.Name getPreferedPalette() {
-		return Palette.Name.RAINBOW_2;
+		return Palette.Name.RAINBOW_MOD2;
 	}
 
 	protected abstract Complex f(Complex z);
@@ -71,7 +72,8 @@ public abstract class Newton extends Fractal {
 	}
 
 	@Override
-	public Result getResult(Complex zn) {
+	public Result getResult(Coordinate point) {
+		Complex zn = new Complex(point);
 
 		for (int iteration = 1; iteration < maxIterations; iteration++) {
 			// zn+1 = zn - alpha * f(z)/f'(z);
@@ -91,15 +93,17 @@ public abstract class Newton extends Fractal {
 	}
 
 	@Override
-	public List<Complex> getIterations(Complex zn, int n) {
-		List<Complex> iterations = new ArrayList<>();
+	public List<Coordinate> getIterations(Coordinate point, int n) {
+		Complex zn = new Complex(point);
+		
+		List<Coordinate> iterations = new ArrayList<>();
 
 		iterations.add(zn);
 		for (int iteration = 0; iteration < n; iteration++) {
 			Complex zn1 = zn.minus(cAlpha.mult(f(zn).div(df(zn))));
 
 			iterations.add(zn1);
-			
+
 			zn = zn1;
 		}
 

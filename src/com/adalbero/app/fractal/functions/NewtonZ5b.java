@@ -1,11 +1,11 @@
 package com.adalbero.app.fractal.functions;
 
-import com.adalbero.app.fractal.data.Complex;
+import com.adalbero.app.fractal.model.Complex;
 
 public class NewtonZ5b extends NewtonZ5 {
 	@Override
-	public String getName() {
-		return "Newton z^5-3iz^3-(5+2i)z^2+3z+1";
+	public String getFunction() {
+		return "f(z) = z^5-1";
 	}
 
 	private Complex im3 = new Complex(0, 3);

@@ -1,6 +1,6 @@
 package com.adalbero.app.fractal.functions;
 
-import com.adalbero.app.fractal.data.Complex;
+import com.adalbero.app.fractal.model.Complex;
 
 public class NewtonSin extends Newton {
 	private static final int NUM_ROOTS = 6;
@@ -11,8 +11,8 @@ public class NewtonSin extends Newton {
 	}
 
 	@Override
-	public String getName() {
-		return "Newton sin(z)";
+	public String getFunction() {
+		return "f(z) = sin(z)";
 	}
 
 	@Override

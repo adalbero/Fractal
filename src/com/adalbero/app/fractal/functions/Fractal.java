@@ -2,21 +2,23 @@ package com.adalbero.app.fractal.functions;
 
 import java.util.List;
 
-import com.adalbero.app.fractal.data.Complex;
-import com.adalbero.app.fractal.data.ComplexPlane;
-import com.adalbero.app.fractal.data.Palette;
-import com.adalbero.app.fractal.data.Parameters;
-import com.adalbero.app.fractal.data.Result;
-import com.adalbero.app.fractal.data.Util;
+import com.adalbero.app.fractal.model.Complex;
+import com.adalbero.app.fractal.model.Coordinate;
+import com.adalbero.app.fractal.model.Palette;
+import com.adalbero.app.fractal.model.Parameters;
+import com.adalbero.app.fractal.model.Plane;
+import com.adalbero.app.fractal.model.Result;
 
 public abstract class Fractal {
 	protected Parameters params = new Parameters();
 
-	public abstract ComplexPlane getPreferedComplexPlane();
+	public abstract Plane getPreferedPlane();
 
 	public abstract Palette.Name getPreferedPalette();
 
 	public abstract String getName();
+
+	public abstract String getFunction();
 
 	public void init() {
 	}
@@ -44,22 +46,13 @@ public abstract class Fractal {
 	public void initResult() {
 	}
 
-	public abstract Result getResult(Complex point);
+	public abstract Result getResult(Coordinate point);
 
-	public abstract List<Complex> getIterations(Complex point, int n);
+	public abstract List<Coordinate> getIterations(Coordinate point, int n);
 
 	@Override
 	public String toString() {
-		String msg = getName() + ": {";
-
-		for (String key : params.getKeys()) {
-			double value = params.getDouble(key);
-			msg += String.format("%s:%s ", key, Util.format(value));
-		}
-
-		msg += "} ";
-
-		return msg;
+		return String.format("%s (%s)", getName(), getFunction());
 	}
 
 }

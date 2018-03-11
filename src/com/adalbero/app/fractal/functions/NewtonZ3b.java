@@ -1,12 +1,12 @@
 package com.adalbero.app.fractal.functions;
 
-import com.adalbero.app.fractal.data.Complex;
+import com.adalbero.app.fractal.model.Complex;
 
 public class NewtonZ3b extends NewtonZ3 {
 
 	@Override
-	public String getName() {
-		return "Newton z^3-2z+2";
+	public String getFunction() {
+		return "f(z) = z^3-2z+2";
 	}
 
 	@Override

@@ -3,10 +3,12 @@ package com.adalbero.app.fractal.functions;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.adalbero.app.fractal.data.Complex;
-import com.adalbero.app.fractal.data.ComplexPlane;
-import com.adalbero.app.fractal.data.Palette;
-import com.adalbero.app.fractal.data.Result;
+import com.adalbero.app.fractal.model.Complex;
+import com.adalbero.app.fractal.model.ComplexPlane;
+import com.adalbero.app.fractal.model.Coordinate;
+import com.adalbero.app.fractal.model.Palette;
+import com.adalbero.app.fractal.model.Plane;
+import com.adalbero.app.fractal.model.Result;
 
 public class Mandelbrot extends Fractal {
 
@@ -21,24 +23,29 @@ public class Mandelbrot extends Fractal {
 	}
 
 	@Override
+	public String getName() {
+		return "Mandelbrot";
+	}
+
+	@Override
+	public String getFunction() {
+		return "f(z) = z^2 + c";
+	}
+
+	@Override
 	public void init() {
 		params.setParam(TOLERANCE_RADIUS, 2d);
 		params.setParam(MAX_ITERATIONS, 1e3);
 	}
 
 	@Override
-	public ComplexPlane getPreferedComplexPlane() {
+	public Plane getPreferedPlane() {
 		return new ComplexPlane(new Complex(-0.7, 0), 1.2);
 	}
 
 	@Override
 	public Palette.Name getPreferedPalette() {
-		return Palette.Name.GRADIENT;
-	}
-
-	@Override
-	public String getName() {
-		return "Mandelbrot";
+		return Palette.Name.METAL;
 	}
 
 	@Override
@@ -55,14 +62,14 @@ public class Mandelbrot extends Fractal {
 		return z.pow(2).plus(c);
 	}
 
-	public Complex getZ0(Complex point) {
+	public Complex getZ0(Coordinate point) {
 		return Complex.ZERO;
 	}
-	
-	public Complex getC(Complex point) {
-		return point;
+
+	public Complex getC(Coordinate point) {
+		return new Complex(point);
 	}
-	
+
 	@Override
 	public void initResult() {
 		super.initResult();
@@ -72,7 +79,7 @@ public class Mandelbrot extends Fractal {
 	}
 
 	@Override
-	public Result getResult(Complex point) {
+	public Result getResult(Coordinate point) {
 		Complex c = getC(point);
 		Complex zn = getZ0(point);
 
@@ -90,11 +97,11 @@ public class Mandelbrot extends Fractal {
 	}
 
 	@Override
-	public List<Complex> getIterations(Complex point, int n) {
+	public List<Coordinate> getIterations(Coordinate point, int n) {
 		Complex c = getC(point);
 		Complex zn = getZ0(point);
 
-		List<Complex> iterations = new ArrayList<>();
+		List<Coordinate> iterations = new ArrayList<>();
 
 		iterations.add(zn);
 		for (int it = 0; it < n; it++) {
