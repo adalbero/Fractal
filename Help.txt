@@ -1,0 +1,8 @@
+General Controls:
+	Dbl-Click			: Zoom In
+	Ctrl-Click			: Zoom In
+	Ctrl-Right-Click	: Zoom Out
+	Shift-Click			: Move Target
+	Shift-Click & Drag	: Move Target
+	Click & Drag		: Move Image
+
