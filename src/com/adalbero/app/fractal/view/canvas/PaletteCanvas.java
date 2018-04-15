@@ -1,4 +1,4 @@
-package com.adalbero.app.fractal.view.panel;
+package com.adalbero.app.fractal.view.canvas;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -10,13 +10,13 @@ import com.adalbero.app.fractal.controller.NotificationListener;
 import com.adalbero.app.fractal.model.NotificationEvent;
 import com.adalbero.app.fractal.model.Palette;
 
-public class PalettePanel extends JPanel implements NotificationListener {
+public class PaletteCanvas extends JPanel implements NotificationListener {
 	private static final long serialVersionUID = 1L;
 
 	private Palette palette;
 	private boolean isHorizontal = true;
 
-	public PalettePanel() {
+	public PaletteCanvas() {
 		this.setBackground(Color.LIGHT_GRAY);
 	}
 

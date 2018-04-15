@@ -12,7 +12,7 @@ public class Palette {
 	public Palette(Name name) {
 		init(name);
 	}
-	
+
 	public void draw(Name name) {
 		init(name);
 	}
@@ -20,7 +20,7 @@ public class Palette {
 	public Name getName() {
 		return this.name;
 	}
-	
+
 	public void next() {
 		Name names[] = Name.values();
 		ordinal = (ordinal + 1) % names.length;
@@ -70,12 +70,16 @@ public class Palette {
 			return Color.BLACK;
 		}
 
-		if (roots > 0) {
-			int n = palette.length / roots;
-			int idx = result.iteraction % n;
-			idx = result.root * n + idx;
+		if (roots > 0 && roots < palette.length) {
+			if (result.rootNum < 0) {
+				return Color.BLACK;
+			} else {
+				int n = palette.length / roots;
+				int idx = result.iteraction % n;
+				idx = result.rootNum * n + idx;
 
-			return getColor(idx);
+				return getColor(idx);
+			}
 		} else {
 			return getColor(result.iteraction);
 		}
@@ -87,7 +91,7 @@ public class Palette {
 
 	public void init(Name name) {
 		this.name = name;
-		
+
 		switch (name) {
 		case RAINBOW:
 			drawRainbow(SIZE, 1);
@@ -99,7 +103,7 @@ public class Palette {
 			drawRainbow(SIZE, 6);
 			break;
 		case BW:
-			drawGradient(SIZE, 1, Color.BLACK, Color.WHITE); 
+			drawGradient(SIZE, 1, Color.BLACK, Color.WHITE);
 			break;
 		case BW_MOD2:
 			drawGradient(SIZE, 2, Color.BLACK, Color.WHITE);
@@ -123,11 +127,9 @@ public class Palette {
 			drawRoots(SIZE, 1, 6);
 			break;
 		case METAL:
-			drawGradient(50, 1,
-					Color.WHITE, 
-					Color.DARK_GRAY, Color.getHSBColor(100/360f, .25f, .50f), Color.WHITE, 
-					Color.DARK_GRAY, Color.getHSBColor(233/360f, .50f, .25f), Color.WHITE, 
-					Color.DARK_GRAY, Color.getHSBColor(308/360f, .25f, .50f), Color.WHITE);
+			drawGradient(50, 1, Color.WHITE, Color.DARK_GRAY, Color.getHSBColor(100 / 360f, .25f, .50f), Color.WHITE,
+					Color.DARK_GRAY, Color.getHSBColor(233 / 360f, .50f, .25f), Color.WHITE, Color.DARK_GRAY,
+					Color.getHSBColor(308 / 360f, .25f, .50f), Color.WHITE);
 			break;
 		}
 
@@ -141,12 +143,12 @@ public class Palette {
 
 			palette[i] = Color.getHSBColor(p, 1f, 1f);
 		}
-		
+
 		if (zebra > 1) {
 			applyZebra(zebra);
 		}
 	}
-	
+
 	public void drawGradient(int size, int zebra, Color... colors) {
 
 		int n = colors.length - 1;
@@ -155,7 +157,7 @@ public class Palette {
 		for (int j = 0; j < n; j++) {
 			for (int i = 0; i < size; i++) {
 				float p = (float) i / size;
-				palette[j*size + i] = mixColors(colors[j], colors[j+1], p);
+				palette[j * size + i] = mixColors(colors[j], colors[j + 1], p);
 			}
 		}
 
@@ -169,13 +171,13 @@ public class Palette {
 		palette = new Color[size * roots];
 
 		for (int j = 0; j < roots; j++) {
-			float h = (float)j/roots;
-			
+			float h = (float) j / roots;
+
 			Color c1 = Color.getHSBColor(h, 1f, 1f);
 			Color c2 = Color.getHSBColor(h, 0.5f, 1f);
 			for (int i = 0; i < size; i++) {
 				float p = (float) i / size;
-				palette[j*size + i] = mixColors(c1, c2, p);
+				palette[j * size + i] = mixColors(c1, c2, p);
 			}
 		}
 
@@ -186,7 +188,7 @@ public class Palette {
 
 	public void applyZebra(int zebra) {
 		int size = palette.length;
-		
+
 		for (int i = 0; i < size; i++) {
 			float d = i % zebra; // inside step
 			float p = 1 - ((d / zebra) / 2f);
@@ -196,11 +198,11 @@ public class Palette {
 			palette[i] = Color.getHSBColor(hsb[0], hsb[1], hsb[2] * p);
 		}
 	}
-	
+
 	private float[] getHSB(Color c) {
 		return Color.RGBtoHSB(c.getRed(), c.getGreen(), c.getBlue(), null);
 	}
-	
+
 	private Color mixColors(Color c1, Color c2, double p) {
 		double np = 1.0 - p;
 

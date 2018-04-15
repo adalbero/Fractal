@@ -35,7 +35,7 @@ public class FractalPlotter implements Runnable {
 
 		Progress progress = new Progress(n);
 
-		fractal.initResult();
+		fractal.prepareToRun();
 
 		int cont = 0;
 		for (int x = 0; x < w; x++) {

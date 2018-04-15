@@ -2,23 +2,23 @@ package com.adalbero.app.fractal.model;
 
 public class Result {
 	public int iteraction;
-	public int root;
+	public int rootNum;
 	
 	public static Result NULL = new Result();
 	
 	public Result() {
 		iteraction = -1;
-		root = 0;
+		rootNum = -1;
 	}
 
 	public Result(int i, int r) {
 		iteraction = i;
-		root = r;
+		rootNum = r;
 	}
 
 	public Result(int i) {
 		iteraction = i;
-		root = 0;
+		rootNum = -1;
 	}
 	
 	public boolean isNull() {
@@ -29,8 +29,8 @@ public class Result {
 	public String toString() {
 		String msg = "Result: {";
 		msg += "it:" + iteraction;
-		if (root > 0) {
-			msg += " root:" + root;
+		if (rootNum > 0) {
+			msg += " root#:" + rootNum;
 		}
 		msg += "} ";
 		

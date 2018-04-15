@@ -11,7 +11,7 @@ import com.adalbero.app.fractal.controller.FractalController;
 import com.adalbero.app.fractal.controller.NotificationListener;
 import com.adalbero.app.fractal.model.NotificationEvent;
 import com.adalbero.app.fractal.model.Palette;
-import com.adalbero.app.fractal.view.panel.PalettePanel;
+import com.adalbero.app.fractal.view.canvas.PaletteCanvas;
 
 public class PaletteForm extends FormPanel implements NotificationListener {
 
@@ -20,7 +20,7 @@ public class PaletteForm extends FormPanel implements NotificationListener {
 	FractalController controller;
 
 	private JComboBox<Palette.Name> selPalette;
-	private PalettePanel palettePanel;
+	private PaletteCanvas palettePanel;
 
 	public PaletteForm() {
 		super("Palette");
@@ -50,7 +50,7 @@ public class PaletteForm extends FormPanel implements NotificationListener {
 	}
 
 	public JPanel getFirstPanel() {
-		palettePanel = new PalettePanel();
+		palettePanel = new PaletteCanvas();
 		palettePanel.setPreferredSize(new Dimension(30, 30));
 
 		return palettePanel;

@@ -1,11 +1,11 @@
 package com.adalbero.app.fractal.model;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 public class Parameters {
-	private Map<String, Complex> params = new TreeMap<>();
+	private Map<String, Complex> params = new LinkedHashMap<>();
 
 	public void setParam(String key, Complex value) {
 		params.put(key, value);

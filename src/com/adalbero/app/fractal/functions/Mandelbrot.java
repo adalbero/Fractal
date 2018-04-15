@@ -71,8 +71,8 @@ public class Mandelbrot extends Fractal {
 	}
 
 	@Override
-	public void initResult() {
-		super.initResult();
+	public void prepareToRun() {
+		super.prepareToRun();
 
 		maxIterations = getMaxIterations();
 		tolerance = getTolerance();

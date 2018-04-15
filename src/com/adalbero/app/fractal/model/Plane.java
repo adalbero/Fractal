@@ -116,8 +116,8 @@ public abstract class Plane {
 		return center.getY();
 	}
 
-	public Coordinate getPoint(int x, int y) {
-		return new Coordinate(getX(x), getY(y));
+	public Coordinate getPoint(int i, int j) {
+		return new Coordinate(getX(i), getY(j));
 	}
 
 	public void moveTo(Coordinate point) {

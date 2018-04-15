@@ -38,8 +38,8 @@ public class JuliaSet extends Mandelbrot {
 	}
 
 	@Override
-	public void initResult() {
-		super.initResult();
+	public void prepareToRun() {
+		super.prepareToRun();
 
 		valueC = getParams().getComplex(C);
 	}

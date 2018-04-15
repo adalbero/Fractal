@@ -7,6 +7,7 @@ import com.adalbero.app.fractal.model.Coordinate;
 import com.adalbero.app.fractal.model.Palette;
 import com.adalbero.app.fractal.model.Parameters;
 import com.adalbero.app.fractal.model.Plane;
+import com.adalbero.app.fractal.model.Progress;
 import com.adalbero.app.fractal.model.Result;
 
 public abstract class Fractal {
@@ -35,7 +36,18 @@ public abstract class Fractal {
 		return params;
 	}
 
+	public void prepareToRun() {
+	}
+
 	public List<Complex> getRoots() {
+		return null;
+	}
+	
+	public Complex[] getKnownRoots() {
+		return null;
+	}
+	
+	public Complex getRoot(int r) {
 		return null;
 	}
 
@@ -43,16 +55,17 @@ public abstract class Fractal {
 
 	public abstract int getMaxIterations();
 
-	public void initResult() {
-	}
-
 	public abstract Result getResult(Coordinate point);
 
 	public abstract List<Coordinate> getIterations(Coordinate point, int n);
 
+	public boolean canDraw(Progress progress) {
+		return progress.isDone();
+	}
+	
 	@Override
 	public String toString() {
-		return String.format("%s (%s)", getName(), getFunction());
+		return String.format("%s: %s", getName(), getFunction());
 	}
 
 }

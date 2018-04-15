@@ -1,4 +1,4 @@
-package com.adalbero.app.fractal.view.panel;
+package com.adalbero.app.fractal.view.canvas;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -10,11 +10,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import javax.swing.JPanel;
-
 import com.adalbero.app.fractal.controller.FractalController;
 import com.adalbero.app.fractal.controller.FractalPlotter;
-import com.adalbero.app.fractal.controller.NotificationListener;
 import com.adalbero.app.fractal.controller.ProgressListener;
 import com.adalbero.app.fractal.model.Coordinate;
 import com.adalbero.app.fractal.model.Mask;
@@ -24,7 +21,7 @@ import com.adalbero.app.fractal.model.Plane;
 import com.adalbero.app.fractal.model.Progress;
 import com.adalbero.app.fractal.model.Result;
 
-public class PaintPanel extends JPanel implements NotificationListener, ProgressListener {
+public class GridCanvas extends PaintCanvas implements ProgressListener {
 
 	private static final long serialVersionUID = 1L;
 
@@ -37,7 +34,7 @@ public class PaintPanel extends JPanel implements NotificationListener, Progress
 	private Point dragDelta;
 	private Point dragSource;
 
-	public PaintPanel() {
+	public GridCanvas() {
 		controller = FractalController.getInstance();
 
 		addListeners();
@@ -100,11 +97,11 @@ public class PaintPanel extends JPanel implements NotificationListener, Progress
 
 					if (e.isMetaDown()) {
 						plane.setTarget(point);
-//						plane.moveTo(point);
+						// plane.moveTo(point);
 						plane.zoom(2);
 					} else {
 						plane.setTarget(point);
-//						plane.moveTo(point);
+						// plane.moveTo(point);
 						plane.zoom(0.5);
 					}
 
@@ -245,7 +242,7 @@ public class PaintPanel extends JPanel implements NotificationListener, Progress
 		mask = null;
 		image = null;
 	}
-	
+
 	public void repaintFractal() {
 		updateFractal();
 	}
@@ -263,10 +260,10 @@ public class PaintPanel extends JPanel implements NotificationListener, Progress
 
 	@Override
 	public void onProgress(Progress progress, Object param) {
-		
+
 		controller.broadcast(this, NotificationEvent.PROGRESS_CHANGED, progress);
-		
-		if (progress.isDone()) {
+
+		if (controller.getFractal().canDraw(progress)) {
 			this.mask = (Mask) param;
 			repaintImage();
 		}

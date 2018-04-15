@@ -165,10 +165,6 @@ public class Complex extends Coordinate {
 		return new Complex(re, im);
 	}
 
-	public final boolean equals(Complex z, double tolerance) {
-		return this.minus(z).mod() < tolerance;
-	}
-
 	@Override
 	public final boolean equals(Object o) {
 		if (o instanceof Complex) {
@@ -201,7 +197,7 @@ public class Complex extends Coordinate {
 			}
 		}
 
-		return re + " " + im;
+		return (re + " " + im).trim();
 	}
 
 	public static Complex parseComplex(String str) {

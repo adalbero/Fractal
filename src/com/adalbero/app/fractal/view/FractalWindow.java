@@ -4,12 +4,16 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
+import com.adalbero.app.fractal.controller.FractalController;
 import com.adalbero.app.fractal.controller.NotificationListener;
 import com.adalbero.app.fractal.controller.NotificationManager;
+import com.adalbero.app.fractal.functions.IteratedFunction;
 import com.adalbero.app.fractal.model.NotificationEvent;
+import com.adalbero.app.fractal.view.canvas.GridCanvas;
+import com.adalbero.app.fractal.view.canvas.IteratedCanvas;
+import com.adalbero.app.fractal.view.canvas.PaintCanvas;
 import com.adalbero.app.fractal.view.panel.ConfigPanel;
-import com.adalbero.app.fractal.view.panel.ContentPanel;
-import com.adalbero.app.fractal.view.panel.PaintPanel;
+import com.adalbero.app.fractal.view.panel.SplitPanel;
 import com.adalbero.app.fractal.view.panel.StatusBarPanel;
 import com.adalbero.app.fractal.view.panel.ToolBarPanel;
 
@@ -18,8 +22,8 @@ public class FractalWindow implements NotificationListener {
 	private ToolBarPanel toolBar;
 	private StatusBarPanel statusBar;
 	private ConfigPanel configPanel;
-	private PaintPanel paintPanel;
-	private ContentPanel contentPanel;
+	private PaintCanvas canvasPanel;
+	private SplitPanel splitPanel;
 
 	public FractalWindow() {
 		mainFrame = new JFrame("Fractals");
@@ -30,13 +34,13 @@ public class FractalWindow implements NotificationListener {
 
 		statusBar = new StatusBarPanel();
 		configPanel = new ConfigPanel();
-		paintPanel = new PaintPanel();
-		contentPanel = new ContentPanel(configPanel, paintPanel);
+		canvasPanel = new GridCanvas();
+		splitPanel = new SplitPanel(configPanel, canvasPanel);
 		toolBar = new ToolBarPanel();
 
 		mainFrame.add(toolBar, BorderLayout.PAGE_START);
 		mainFrame.add(statusBar, BorderLayout.PAGE_END);
-		mainFrame.add(contentPanel, BorderLayout.CENTER);
+		mainFrame.add(splitPanel, BorderLayout.CENTER);
 
 	}
 
@@ -45,10 +49,25 @@ public class FractalWindow implements NotificationListener {
 		mainFrame.setVisible(true);
 	}
 
+	public void update() {
+		if (FractalController.getInstance().getFractal() instanceof IteratedFunction) {
+			canvasPanel = new IteratedCanvas();
+		} else {
+			canvasPanel = new GridCanvas(); 
+		}
+		
+		splitPanel.setRightComponent(canvasPanel);
+		splitPanel.setDividerLocation(450);
+	}
+
 	@Override
 	public void onNotification(Object source, NotificationEvent event, Object param) {
+		if (event == NotificationEvent.FRACTAL_CHANGED) {
+			update();
+		}
+
 		statusBar.onNotification(source, event, param);
 		configPanel.onNotification(source, event, param);
-		paintPanel.onNotification(source, event, param);
+		canvasPanel.onNotification(source, event, param);
 	}
 }

@@ -6,10 +6,10 @@ import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 
-public class ContentPanel extends JSplitPane {
+public class SplitPanel extends JSplitPane {
 	private static final long serialVersionUID = 1L;
 
-	public ContentPanel(Component left, Component right) {
+	public SplitPanel(Component left, Component right) {
 		super(JSplitPane.HORIZONTAL_SPLIT);
 
 		Dimension minimumSize = new Dimension(200, 50);
@@ -22,7 +22,6 @@ public class ContentPanel extends JSplitPane {
 		this.setRightComponent(right);
 
 		this.setOneTouchExpandable(true);
-		this.setDividerLocation(400);
 	}
-
+	
 }

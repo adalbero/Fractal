@@ -43,7 +43,6 @@ public class ToolBarPanel extends JPanel {
 		for (Fractal f : controller.getFractalList()) {
 			selFractal.addItem(f.toString());
 		}
-//		selFractal.setSelectedIndex(0);
 		
 		this.add(new JLabel("Fractal:"), null);
 		this.add(selFractal, null);

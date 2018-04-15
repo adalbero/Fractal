@@ -3,12 +3,6 @@ import com.adalbero.app.fractal.model.Complex;
 import com.adalbero.app.fractal.model.Palette;
 
 public class NewtonZ3 extends Newton {
-	private static final int NUM_ROOTS = 3;
-
-	@Override
-	public int getNumRoots() {
-		return NUM_ROOTS;
-	}
 
 	@Override
 	public String getFunction() {
@@ -21,13 +15,13 @@ public class NewtonZ3 extends Newton {
 	}
 
 	@Override
-	protected Complex f(Complex z) {
+	public Complex f(Complex z) {
 		// z^3 - 1
 		return z.pow(3).minus(1);
 	}
 
 	@Override
-	protected Complex df(Complex z) {
+	public Complex df(Complex z) {
 		// 3z^2
 		return z.pow(2).mult(3);
 	}
